@@ -7,9 +7,9 @@ function App() {
   const [posts, setPosts] = useState<PostTypes[]>([]);
   const [ErrorFetching, setErrorFetching] = useState("");
   const [loading, setLoading] = useState(true);
-  const [title, settitle] = useState("")
-  const [description, setdescription] = useState("")
-  const [img, setimg] = useState("")
+  const [title, settitle] = useState("");
+  const [description, setdescription] = useState("");
+  const [img, setimg] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +18,7 @@ function App() {
         setTimeout(() => {
           setPosts(data);
           setLoading(false);
-        }, 2000);
+        }, 1000);
       } catch (error) {
         setErrorFetching(`${error}`);
         setLoading(false);
@@ -28,49 +28,51 @@ function App() {
   }, []);
 
   const HandleNewPost = async () => {
-    
-    const NewPost = {title, description, img}
+    const NewPost = { title, description, img };
 
-    try{
+    try {
       const ResponsePost = await fetch("http://localhost:3000/post", {
-        method:"POST",
+        method: "POST",
         headers: {
-          "Content-Type": "aplication/json"
+          "Content-Type": "aplication/json",
         },
-        body: JSON.stringify(NewPost)
+        body: JSON.stringify(NewPost),
       });
-      const Result = await ResponsePost.json()
-      alert(`Post exitosamente publicado ${Result}`)
-    } catch(error){
-      alert(`${error}`)
+      const Result = await ResponsePost.json();
+      alert(`Post exitosamente publicado ${Result}`);
+    } catch (error) {
+      alert(`${error}`);
     }
-  }
+  };
 
   if (loading) {
-    return(
-    <div className="flex items-center justify-center min-w-screen">
-      <span className="loading loading-bars loading-xl text-blue-800 size-15"></span>
-    </div>
-    )
+    return (
+      <div className="flex items-center justify-center min-w-screen">
+        <span className="loading loading-bars loading-xl text-blue-800 size-15"></span>
+      </div>
+    );
   }
 
   if (ErrorFetching) {
     return (
-    <div>
-      <p className="text-white">{ErrorFetching}</p>
-    </div>
-    )
+      <div className="flex flex-col items-center justify-center min-w-screen">
+        <p className="text-black text-2xl font-bold">{ErrorFetching}</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="bg-black text-white py-2 rounded mt-2 
+            hover:bg-blue-700 transition w-50 cursor-pointer"
+        >
+          Try Again
+        </button>
+      </div>
+    );
   }
 
   return (
     <div className="min-w-screen flex justify-center">
       <div className="p-8 flex flex-col items-center">
-        <p className="text-6xl font-bold mb-6 text-black">
-          Create post
-        </p>
-        <form
-        onSubmit={HandleNewPost} 
-        className="flex flex-col gap-4 mb-10">
+        <p className="text-6xl font-bold mb-6 text-black">Create post</p>
+        <form onSubmit={HandleNewPost} className="flex flex-col gap-4 mb-10">
           <input
             value={title}
             onChange={(e) => settitle(e.target.value)}
@@ -95,7 +97,6 @@ function App() {
             placeholder="Image Link"
           />
           <div className="flex flex-col gap-2 mt-2">
-
             <button
               type="submit"
               className="bg-black text-white py-2 rounded 
@@ -110,7 +111,6 @@ function App() {
             >
               List Posts
             </button> */}
-
           </div>
         </form>
 
