@@ -25,8 +25,9 @@ function CardPost({ CardIndividualPost, Ondelete}: { CardIndividualPost: PostTyp
         ></img>
         <button
           onClick={() => OnDeleteFunction()}
-          className="mt-2 bg-black text-white py-2 rounded 
-            hover:bg-blue-700 transition w-auto cursor-pointer"
+          className="mt-2 bg-black font-light
+            hover:font-bold transition-all py-2 rounded 
+            hover:bg-blue-700 w-auto cursor-pointer"
         >
           Delete
         </button>

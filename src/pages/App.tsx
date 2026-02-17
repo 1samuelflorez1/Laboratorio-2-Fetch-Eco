@@ -76,15 +76,15 @@ function App() {
     <div className="min-h-screen flex justify-center mt-10">
       <div className="p-20 flex flex-col">
         <p 
-        className="text-6xl font-bold mb-6 text-black cursor-pointer hover:text-blue-700
-        transition-all blur-xs hover:blur-none">Create Post</p>
+        className="text-6xl font-thin mb-6 text-black cursor-pointer hover:text-blue-700
+        transition-all hover:font-bold">Create Post</p>
         <form onSubmit={HandleNewPost} className="flex flex-col gap-4 mb-2">
           <input
             required
             value={title}
             onChange={(e) => settitle(e.target.value)}
             className="text-black w-100 border p-2 rounded focus:outline-black border-black/20
-            hover:border-blue-600 transition-all cursor-pointer placeholder:text-black/20"
+            hover:border-blue-600 transition-all cursor-pointer placeholder:text-black/20 hover:scale-x-110"
             placeholder="Title"
             type="Text"
           />
@@ -93,7 +93,7 @@ function App() {
             value={description}
             onChange={(e) => setdescription(e.target.value)}
             className="text-black w-100 border p-2 rounded focus:outline-blue-600 border-black/20
-              hover:border-blue-800 transition-all cursor-pointer placeholder:text-black/20"
+              hover:border-blue-800 transition-all cursor-pointer placeholder:text-black/20 hover:scale-x-110"
             placeholder="Description"
             type="text"
           />
@@ -102,14 +102,15 @@ function App() {
             value={img}
             onChange={(e) => setimg(e.target.value)}
             className="text-black w-100 border p-2 rounded focus:outline-blue-600 border-black/20
-            hover:border-blue-800 transition-all cursor-pointer placeholder:text-black/20"
+            hover:border-blue-800 transition-all cursor-pointer placeholder:text-black/20 hover:scale-x-110"
             placeholder="Image Link"
           />
           <div className="flex flex-col gap-2 mt-2">
             <button
               type="submit"
               className="bg-white text-black py-2 rounded hover:text-white
-            hover:bg-blue-700 transition w-100 cursor-pointer font-medium"
+            hover:bg-blue-700 transition-all w-100 cursor-pointer font-light
+            hover:font-bold hover:scale-x-110"
             >
               Create Post
             </button>
@@ -119,7 +120,8 @@ function App() {
             <button
               onClick={() => navigate("/listpost")}
               className="bg-white text-black py-2 rounded hover:text-white
-            hover:bg-blue-700 transition w-100 cursor-pointer font-medium"
+            hover:bg-blue-700 transition-all w-100 cursor-pointer font-light
+            hover:font-bold hover:scale-x-110"
             >
              Go to List Posts
             </button>

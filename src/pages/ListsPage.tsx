@@ -35,7 +35,8 @@ function ListPost() {
         },
       });
       const Result = await ResponsePost.json();
-      alert(`Post exitosamente eliminado ${Result}`);
+      alert(`Post exitosamente eliminado`);
+      console.info(Result)
     } catch (error) {
       alert(`${error}`);
     }
@@ -67,11 +68,13 @@ function ListPost() {
   return (
     <div className="min-h-screen flex justify-center">
       <div className="p-8 flex flex-col items-center">
-        <p className="text-6xl font-bold mb-6 text-black">List Posts</p>
+        <p className="text-6xl font-thin mb-6 text-black cursor-pointer hover:text-blue-700
+        transition-all hover:font-bold">List Posts</p>
         <button
           onClick={() => navigate("/")}
           className="bg-black text-white py-2 rounded 
-            hover:bg-blue-700 transition w-100 cursor-pointer"
+            hover:bg-blue-700 transition-all w-100 cursor-pointer font-light
+            hover:font-bold hover:scale-x-110"
         >
           Go to Create Post
         </button>
