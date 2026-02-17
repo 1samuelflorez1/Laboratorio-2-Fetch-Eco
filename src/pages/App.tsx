@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
-import type { PostTypes } from "./types/PostsTypes";
-import { getStuff } from "./services/InfoDB";
-import CardPost from "./components/CardPost";
+// import type { PostTypes } from "../types/PostsTypes";
+// import { getStuff } from "../services/InfoDB";
+// import CardPost from "../components/CardPost";
+import { useNavigate } from "react-router";
 
 function App() {
-  const [posts, setPosts] = useState<PostTypes[]>([]);
+  // const [posts, setPosts] = useState<PostTypes[]>([]);
   const [ErrorFetching, setErrorFetching] = useState("");
   const [loading, setLoading] = useState(true);
   const [title, settitle] = useState("");
   const [description, setdescription] = useState("");
   const [img, setimg] = useState("");
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getStuff();
+        // const data = await getStuff();
         setTimeout(() => {
-          setPosts(data);
+          // setPosts(data);
           setLoading(false);
         }, 1000);
       } catch (error) {
@@ -29,7 +31,7 @@ function App() {
 
   const HandleNewPost = async () => {
     const NewPost = { title, description, img };
-
+    navigate("/listpost")
     try {
       const ResponsePost = await fetch("http://localhost:3000/post", {
         method: "POST",
@@ -39,7 +41,9 @@ function App() {
         body: JSON.stringify(NewPost),
       });
       const Result = await ResponsePost.json();
-      alert(`Post exitosamente publicado ${Result}`);
+      alert(`Post exitosamente publicado`);
+      console.info(Result)
+
     } catch (error) {
       alert(`${error}`);
     }
@@ -47,7 +51,7 @@ function App() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-w-screen">
+      <div className="flex items-center justify-center min-h-screen">
         <span className="loading loading-bars loading-xl text-blue-800 size-15"></span>
       </div>
     );
@@ -55,7 +59,7 @@ function App() {
 
   if (ErrorFetching) {
     return (
-      <div className="flex flex-col items-center justify-center min-w-screen">
+      <div className="flex flex-col items-center justify-center min-h-screen">
         <p className="text-black text-2xl font-bold">{ErrorFetching}</p>
         <button
           onClick={() => window.location.reload()}
@@ -69,11 +73,14 @@ function App() {
   }
 
   return (
-    <div className="min-w-screen flex justify-center">
-      <div className="p-8 flex flex-col items-center">
-        <p className="text-6xl font-bold mb-6 text-black">Create post</p>
-        <form onSubmit={HandleNewPost} className="flex flex-col gap-4 mb-10">
+    <div className="min-h-screen flex justify-center mt-10">
+      <div className="p-20 flex flex-col">
+        <p 
+        className="text-6xl font-bold mb-6 text-black cursor-pointer hover:text-blue-700
+        transition-all blur-xs hover:blur-none">Create Post</p>
+        <form onSubmit={HandleNewPost} className="flex flex-col gap-4 mb-2">
           <input
+            required
             value={title}
             onChange={(e) => settitle(e.target.value)}
             className="text-black w-100 border p-2 rounded focus:outline-black border-black/20
@@ -82,6 +89,7 @@ function App() {
             type="Text"
           />
           <input
+            required
             value={description}
             onChange={(e) => setdescription(e.target.value)}
             className="text-black w-100 border p-2 rounded focus:outline-blue-600 border-black/20
@@ -90,6 +98,7 @@ function App() {
             type="text"
           />
           <input
+            required
             value={img}
             onChange={(e) => setimg(e.target.value)}
             className="text-black w-100 border p-2 rounded focus:outline-blue-600 border-black/20
@@ -99,37 +108,21 @@ function App() {
           <div className="flex flex-col gap-2 mt-2">
             <button
               type="submit"
-              className="bg-black text-white py-2 rounded 
-            hover:bg-blue-700 transition w-100 cursor-pointer"
+              className="bg-white text-black py-2 rounded hover:text-white
+            hover:bg-blue-700 transition w-100 cursor-pointer font-medium"
             >
               Create Post
             </button>
 
-            {/* <button
-              className="bg-black text-white py-2 rounded 
-            hover:bg-blue-700 transition w-100 cursor-pointer"
-            >
-              List Posts
-            </button> */}
           </div>
         </form>
-
-        <div className="grid grid-cols-3 gap-15">
-          {posts.length > 0 ? (
-            posts.map((postIndividual: PostTypes) => {
-              return (
-                <CardPost
-                  key={postIndividual.id}
-                  CardIndividualPost={postIndividual}
-                ></CardPost>
-              );
-            })
-          ) : (
-            <div>
-              <p>No hay informacion</p>
-            </div>
-          )}
-        </div>
+            <button
+              onClick={() => navigate("/listpost")}
+              className="bg-white text-black py-2 rounded hover:text-white
+            hover:bg-blue-700 transition w-100 cursor-pointer font-medium"
+            >
+             Go to List Posts
+            </button>
       </div>
     </div>
   );
