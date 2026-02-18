@@ -73,7 +73,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen flex justify-center mt-10">
+    <div className="min-h-screen flex justify-center mt-10 gap-">
       <div className="p-20 flex flex-col">
         <p 
         className="text-6xl font-thin mb-6 text-black cursor-pointer hover:text-blue-700
