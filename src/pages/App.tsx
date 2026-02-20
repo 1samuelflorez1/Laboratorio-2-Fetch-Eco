@@ -41,7 +41,6 @@ function App() {
         body: JSON.stringify(NewPost),
       });
       const Result = await ResponsePost.json();
-      alert(`Post exitosamente publicado`);
       console.info(Result)
 
     } catch (error) {
@@ -99,6 +98,7 @@ function App() {
           />
           <input
             required
+            type="url"
             value={img}
             onChange={(e) => setimg(e.target.value)}
             className="text-black w-100 border p-2 rounded focus:outline-blue-600 border-black/20

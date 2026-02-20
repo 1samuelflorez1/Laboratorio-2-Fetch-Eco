@@ -38,7 +38,7 @@ function ListPost() {
       alert(`Post exitosamente eliminado`);
       console.info(Result)
     } catch (error) {
-      alert(`${error}`);
+      console.info(error)
     }
   };
 
@@ -81,7 +81,7 @@ function ListPost() {
 
         <div className="grid grid-cols-3 gap-15 mt-15">
           {posts.length > 0 ? (
-            posts.map((postIndividual: PostTypes) => {
+            [...posts].reverse().map((postIndividual: PostTypes) => {
               return (
                 <CardPost
                   Ondelete={HandleDelete}
